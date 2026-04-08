@@ -1,0 +1,21 @@
+# Django 5+ et REST
+Django>=5.0,<6.0
+djangorestframework>=3.14,<4.0
+djangorestframework-simplejwt>=5.3,<6.0
+django-filter>=23.0,<25.0
+
+# Base de données
+psycopg[binary]>=3.1,<4.0
+
+# API Documentation
+drf-spectacular>=0.27.0,<1.0
+
+# CORS
+django-cors-headers>=4.3,<5.0
+
+# Utilitaires
+python-dotenv>=1.0,<2.0
+
+# Préparation Celery/Redis (optionnel en V1)
+# celery>=5.3,<6.0
+# redis>=5.0,<6.0
