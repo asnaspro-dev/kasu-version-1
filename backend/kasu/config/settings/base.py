@@ -5,9 +5,18 @@ Django 5+ | KASU Backend
 import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Charge le bon fichier d'environnement selon le settings module demandé.
+ENV_ROOT = BASE_DIR.parent
+settings_module = os.environ.get("DJANGO_SETTINGS_MODULE", "")
+if "production" in settings_module:
+    load_dotenv(ENV_ROOT / ".env.production")
+else:
+    load_dotenv(ENV_ROOT / ".env")
 
 # SECURITY WARNING: override in dev/prod
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "change-me-in-production")
@@ -86,7 +95,10 @@ DATABASES = {
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
         "CONN_MAX_AGE": 60,
-        "OPTIONS": {"options": "-c timezone=utc"},
+        "OPTIONS": {
+            "options": "-c timezone=utc",
+            "sslmode": os.environ.get("POSTGRES_SSLMODE", "prefer"),
+        },
     }
 }
 
